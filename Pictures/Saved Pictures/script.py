@@ -1,3 +1,5 @@
+import os
+
 Ilist = []
 Ivar = []
 Llist = []
@@ -5,9 +7,9 @@ Lvar = []
 Mlist = []
 Mvar = []
 
-filepath1 = 'tr-heaploop.ref'
+result = 'result.txt'
 
-with open(filepath1) as fp:
+with open("tr-matmul.ref") as fp:
     line = fp.readline()
     while line:
         l = line.split(',')
@@ -33,6 +35,14 @@ with open(filepath1) as fp:
             else:
                 Mlist.append(check)
                 Mvar.append(1)
+        line = fp.readline()
 fp.close()
-        
-        
+
+
+with open(result,"w") as rf:
+    cnt = len(Ivar)
+    rf.write("Instructions:\n")
+    for i in range(cnt):
+        wl = Ilist[i] + ',' + str(Ivar[i]) + '\n'
+        rf.write(wl)
+rf.close()
